@@ -1,2 +1,4 @@
 travis-trusty
 travis-xenial
+travis-trusty-percona
+travis-xenial-percona

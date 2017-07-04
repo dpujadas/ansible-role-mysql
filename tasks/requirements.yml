@@ -12,3 +12,11 @@
   with_items: '{{ mysql_required_pip_packages }}'
   loop_control:
     loop_var: mysql_pip_package
+
+- name: Install trusty repo
+  apt_repository:
+    repo: 'deb http://archive.ubuntu.com/ubuntu trusty universe'
+  when:
+    - not mysql_use_percona
+    - mysql_version == '5.6'
+    - ansible_lsb.codename != 'trusty'

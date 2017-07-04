@@ -13,10 +13,27 @@
       role: ansible-role-mysql
     }
 
+- hosts: travis-trusty-percona
+  connection: docker
+  remote_user: root
+  vars:
+    mysql_root_password: 'root'
+    mysql_databases:
+      - name: testdb
+    mysql_users:
+      - name: test
+        password: test
+  roles:
+    - {
+      role: ansible-role-mysql,
+      mysql_use_percona: True
+    }
+
 - hosts: travis-xenial
   connection: docker
   remote_user: root
   vars:
+    mysql_root_password: 'root'
     mysql_databases:
       - name: testdb
     mysql_users:
@@ -26,4 +43,21 @@
     - {
       role: ansible-role-mysql,
       mysql_init_system: 'systemd'
+    }
+
+- hosts: travis-xenial-percona
+  connection: docker
+  remote_user: root
+  vars:
+    mysql_root_password: 'root'
+    mysql_databases:
+      - name: testdb
+    mysql_users:
+      - name: test
+        password: test
+  roles:
+    - {
+      role: ansible-role-mysql,
+      mysql_init_system: 'systemd',
+      mysql_use_percona: True
     }
