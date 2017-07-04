@@ -1,0 +1,20 @@
+- name: Create databases
+  mysql_db:
+    collation: '{{ mysql_db.collation | default("utf8_general_ci") }}'
+    encoding: '{{ mysql_db.encoding | default("utf8") }}'
+    name: '{{ mysql_db.name }}'
+    state: present
+  with_items: '{{ mysql_databases }}'
+  loop_control:
+    loop_var: mysql_db
+
+- name: Create the database users
+  mysql_user:
+    host: '{{ mysql_user.host | default("localhost") }}'
+    name: '{{ mysql_user.name }}'
+    password: '{{ mysql_user.password }}'
+    priv: '{{ mysql_user.priv | default("*.*:USAGE") }}'
+    state: 'present'
+  with_items: '{{ mysql_users }}'
+  loop_control:
+    loop_var: mysql_user

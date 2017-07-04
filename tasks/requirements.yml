@@ -1,0 +1,14 @@
+- name: Install required packages
+  apt:
+    name: '{{ mysql_apt_package }}'
+  with_items: '{{ mysql_required_packages }}'
+  loop_control:
+    loop_var: mysql_apt_package
+
+- name: Install required pip packages
+  pip:
+    name: '{{ mysql_pip_package.name }}'
+    version: '{{ mysql_pip_package.version|d(omit) }}'
+  with_items: '{{ mysql_required_pip_packages }}'
+  loop_control:
+    loop_var: mysql_pip_package

@@ -1,0 +1,5 @@
+- name: Ensure mysql is started and enabled at boot
+  service:
+    name: 'mysql'
+    state: 'started'
+    enabled: True

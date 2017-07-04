@@ -1,0 +1,29 @@
+- hosts: travis-trusty
+  connection: docker
+  remote_user: root
+  vars:
+    mysql_root_password: 'root'
+    mysql_databases:
+      - name: testdb
+    mysql_users:
+      - name: test
+        password: test
+  roles:
+    - {
+      role: ansible-role-mysql
+    }
+
+- hosts: travis-xenial
+  connection: docker
+  remote_user: root
+  vars:
+    mysql_databases:
+      - name: testdb
+    mysql_users:
+      - name: test
+        password: test
+  roles:
+    - {
+      role: ansible-role-mysql,
+      mysql_init_system: 'systemd'
+    }

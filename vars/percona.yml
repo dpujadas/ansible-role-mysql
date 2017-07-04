@@ -1,0 +1,3 @@
+mysql_percona_repository: 'https://repo.percona.com/apt/percona-release_0.1-4.{{ ansible_lsb.codename }}_all.deb'
+mysql_packages:
+  - percona-server-server-{{ mysql_version }}

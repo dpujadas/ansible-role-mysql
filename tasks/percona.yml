@@ -1,0 +1,7 @@
+- name: Include the percona variables
+  include_vars: 'percona.yml'
+
+- name: Install percona repository packages
+  apt:
+    deb: '{{ mysql_percona_repository }}'
+    update_cache: yes

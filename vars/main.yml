@@ -1,0 +1,13 @@
+---
+# vars file for mysql
+
+mysql_packages:
+  - mysql-server-{{ mysql_version }}
+mysql_config_file: '/etc/mysql/my.cnf'
+mysql_config_include_dir: /etc/mysql/my.cnf.d
+mysql_required_packages:
+  - 'build-essential'
+  - 'python-dev'
+  - 'libmysqlclient-dev'
+mysql_required_pip_packages:
+  - name: 'MySQL-python'
