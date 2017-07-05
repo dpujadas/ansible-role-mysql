@@ -1,0 +1,14 @@
+- name: Check for apparmor
+  shell: >
+    service apparmor status
+  register: mysql_svc_apparmor
+  changed_when: False
+  failed_when: mysql_svc_apparmor.rc != 0 and ('unrecognized service' not in mysql_svc_apparmor.stderr)
+
+- name: Configure apparmor alias
+  lineinfile:
+    name: '/etc/apparmor.d/tunables/alias'
+    regexp: '^alias /var/lib/mysql/ ->'
+    line: 'alias /var/lib/mysql/ -> {{ mysql_datadir }},'
+  notify: restart apparmor
+  when: mysql_svc_apparmor.rc == 0

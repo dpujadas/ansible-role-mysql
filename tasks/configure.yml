@@ -35,3 +35,6 @@
     owner: 'mysql'
     group: 'mysql'
     mode: '0700'
+
+- include: 'apparmor.yml'
+  when: mysql_datadir != '/var/lib/mysql'
