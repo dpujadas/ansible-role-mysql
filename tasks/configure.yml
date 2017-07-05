@@ -27,3 +27,11 @@
   loop_control:
     loop_var: mysql_config_file_loop
   notify: restart mysql
+
+- name: Ensure {{ mysql_datadir }} exists and belongs to mysql user
+  file:
+    dest: '{{ mysql_datadir }}'
+    state: 'directory'
+    owner: 'mysql'
+    group: 'mysql'
+    mode: '0700'
