@@ -18,10 +18,12 @@
 
 - name: Copy my.cnf override files
   template:
-    src: '{{ item }}'
-    dest: '{{ mysql_config_include_dir }}/{{ item | basename }}'
+    src: '{{ mysql_config_file_loop }}'
+    dest: '{{ mysql_config_include_dir }}/{{ mysql_config_file_loop | basename }}'
     owner: root
     group: root
     mode: 0644
   with_items: '{{ mysql_config_include_files }}'
+  loop_control:
+    loop_var: mysql_config_file_loop
   notify: restart mysql

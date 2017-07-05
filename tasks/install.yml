@@ -11,12 +11,12 @@
 
 - name: Install the mysql packages
   apt:
-    name: '{{ mysql_apt_package }}'
+    name: '{{ mysql_apt_package_loop }}'
     state: 'present'
     update_cache: 'yes'
   with_items: '{{ mysql_packages }}'
   loop_control:
-    loop_var: mysql_apt_package
+    loop_var: mysql_apt_package_loop
 
 - name: Remove policy-rc.d
   file:

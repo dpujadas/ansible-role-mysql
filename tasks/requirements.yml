@@ -1,17 +1,17 @@
 - name: Install required packages
   apt:
-    name: '{{ mysql_apt_package }}'
+    name: '{{ mysql_apt_package_loop }}'
   with_items: '{{ mysql_required_packages }}'
   loop_control:
-    loop_var: mysql_apt_package
+    loop_var: mysql_apt_package_loop
 
 - name: Install required pip packages
   pip:
-    name: '{{ mysql_pip_package.name }}'
-    version: '{{ mysql_pip_package.version|d(omit) }}'
+    name: '{{ mysql_pip_package_loop.name }}'
+    version: '{{ mysql_pip_package_loop.version|d(omit) }}'
   with_items: '{{ mysql_required_pip_packages }}'
   loop_control:
-    loop_var: mysql_pip_package
+    loop_var: mysql_pip_package_loop
 
 - name: Install trusty repo
   apt_repository:
