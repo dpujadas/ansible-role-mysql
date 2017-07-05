@@ -12,3 +12,5 @@
     line: 'alias /var/lib/mysql/ -> {{ mysql_datadir }},'
   notify: restart apparmor
   when: mysql_svc_apparmor.rc == 0
+
+- meta: flush_handlers
