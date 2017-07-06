@@ -6,8 +6,8 @@
     group: 'root'
     mode: '0755'
   with_items:
-    - 'mysql_config_dir'
-    - 'mysql_config_include_dir'
+    - '{{ mysql_config_dir }}'
+    - '{{ mysql_config_include_dir }}'
   loop_control:
     loop_var: mysql_config_dir_loop
 
