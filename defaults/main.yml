@@ -1,8 +1,7 @@
 ---
 # defaults file for mysql
 
-mysql_use_percona: False
-mysql_version: '5.6'
+mysql_version: '5.7'
 mysql_init_system: 'upstart'
 mysql_config_include_files: []
 mysql_databases: []

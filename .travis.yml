@@ -13,8 +13,6 @@ install:
   - ansible-galaxy install -r requirements.yml
   - docker run --name travis-trusty --privileged -d dpujadas/baseimage:trusty
   - docker run --name travis-xenial --privileged -d dpujadas/baseimage:xenial
-  - docker run --name travis-trusty-percona --privileged -d dpujadas/baseimage:trusty
-  - docker run --name travis-xenial-percona --privileged -d dpujadas/baseimage:xenial
 
 script:
   # Check the syntax
@@ -25,13 +23,9 @@ script:
   - >
     ansible-playbook tests/test.yml -i tests/inventory | tee /tmp/output.txt;
     (grep -q 'travis-trusty.*changed=0.*failed=0' /tmp/output.txt &&
-    grep -q 'travis-xenial.*changed=0.*failed=0' /tmp/output.txt &&
-    grep -q 'travis-trusty-percona.*changed=0.*failed=0' /tmp/output.txt &&
-    grep -q 'travis-xenial-percona.*changed=0.*failed=0' /tmp/output.txt)
+    grep -q 'travis-xenial.*changed=0.*failed=0' /tmp/output.txt)
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
   # Check mysql is up and running
   - (echo > /dev/tcp/$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' travis-trusty)/3306) >/dev/null 2>&1
   - (echo > /dev/tcp/$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' travis-xenial)/3306) >/dev/null 2>&1
-  - (echo > /dev/tcp/$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' travis-trusty-percona)/3306) >/dev/null 2>&1
-  - (echo > /dev/tcp/$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' travis-xenial-percona)/3306) >/dev/null 2>&1

@@ -20,3 +20,8 @@
     - not mysql_use_percona
     - mysql_version == '5.6'
     - ansible_lsb.codename != 'trusty'
+
+- name: Install percona repository packages
+  apt:
+    deb: '{{ mysql_percona_repository }}'
+    update_cache: yes

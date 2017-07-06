@@ -1,11 +1,6 @@
 ---
 # tasks file for mysql
 
-- include: 'percona.yml'
-  when: mysql_use_percona
-  tags:
-    - mysql
-
 - include: '{{ item }}.yml'
   with_items:
     - 'requirements'

@@ -11,14 +11,6 @@
   loop_control:
     loop_var: mysql_config_dir_loop
 
-- name: Ensure {{ mysql_datadir }} exists and belongs to mysql user
-  file:
-    dest: '{{ mysql_datadir }}'
-    state: 'directory'
-    owner: 'mysql'
-    group: 'mysql'
-    mode: '0700'
-
 - name: Configure mysql-server (my.cnf)
   template:
     src: 'my.cnf.j2'

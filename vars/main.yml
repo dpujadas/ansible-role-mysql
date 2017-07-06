@@ -1,8 +1,11 @@
 ---
 # vars file for mysql
 
+mysql_user: 'mysql'
+mysql_group: '{{ mysql_user }}'
+mysql_percona_repository: 'https://repo.percona.com/apt/percona-release_0.1-4.{{ ansible_lsb.codename }}_all.deb'
 mysql_packages:
-  - mysql-server-{{ mysql_version }}
+  - percona-server-server-{{ mysql_version }}
 mysql_config_dir: '/etc/mysql'
 mysql_config_include_dir: '{{ mysql_config_dir }}/my.cnf.d'
 mysql_config_file: '{{ mysql_config_dir }}/my.cnf'

@@ -1,6 +1,6 @@
 galaxy_info:
   author: David Pujadas
-  description: Ansible role to install mysql on Ubuntu server
+  description: Ansible role to install Percona MySQL on Ubuntu server
 
   license: MIT
 
