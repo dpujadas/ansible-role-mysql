@@ -1,32 +1,15 @@
-- name: Configure mysql-server (my.cnf)
-  template:
-    src: 'my.cnf.j2'
-    dest: '{{ mysql_config_file }}'
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart mysql
-
-- name: Verify include directory exists
+- name: Ensure config dirs exist
   file:
-    path: '{{ mysql_config_include_dir }}'
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-  when: mysql_config_include_files | length
-
-- name: Copy my.cnf override files
-  template:
-    src: '{{ mysql_config_file_loop }}'
-    dest: '{{ mysql_config_include_dir }}/{{ mysql_config_file_loop | basename }}'
-    owner: root
-    group: root
-    mode: 0644
-  with_items: '{{ mysql_config_include_files }}'
+    dest: '{{ mysql_config_dir_loop }}'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+  with_items:
+    - 'mysql_config_dir'
+    - 'mysql_config_include_dir'
   loop_control:
-    loop_var: mysql_config_file_loop
-  notify: restart mysql
+    loop_var: mysql_config_dir_loop
 
 - name: Ensure {{ mysql_datadir }} exists and belongs to mysql user
   file:
@@ -35,6 +18,27 @@
     owner: 'mysql'
     group: 'mysql'
     mode: '0700'
+
+- name: Configure mysql-server (my.cnf)
+  template:
+    src: 'my.cnf.j2'
+    dest: '{{ mysql_config_file }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: restart mysql
+
+- name: Copy my.cnf override files
+  template:
+    src: '{{ mysql_config_file_loop }}'
+    dest: '{{ mysql_config_include_dir }}/{{ mysql_config_file_loop | basename }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  with_items: '{{ mysql_config_include_files }}'
+  loop_control:
+    loop_var: mysql_config_file_loop
+  notify: restart mysql
 
 - include: 'apparmor.yml'
   when: mysql_datadir != '/var/lib/mysql'

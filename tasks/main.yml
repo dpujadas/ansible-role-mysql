@@ -9,8 +9,8 @@
 - include: '{{ item }}.yml'
   with_items:
     - 'requirements'
-    - 'install'
     - 'configure'
+    - 'install'
     - '{{ mysql_init_system }}'
     - 'secure'
     - 'databases-users'

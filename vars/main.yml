@@ -3,8 +3,9 @@
 
 mysql_packages:
   - mysql-server-{{ mysql_version }}
-mysql_config_file: '/etc/mysql/my.cnf'
-mysql_config_include_dir: /etc/mysql/my.cnf.d
+mysql_config_dir: '/etc/mysql'
+mysql_config_file: '{{ mysql_config_dir }}/my.cnf'
+mysql_config_include_dir: '{{ mysql_config_dir }}/my.cnf.d'
 mysql_required_packages:
   - 'build-essential'
   - 'python-dev'
