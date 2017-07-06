@@ -10,7 +10,11 @@
     name: '/etc/apparmor.d/tunables/alias'
     regexp: '^alias /var/lib/mysql/ ->'
     line: 'alias /var/lib/mysql/ -> {{ mysql_datadir }},'
-  notify: restart apparmor
   when: mysql_svc_apparmor.rc == 0
+  register: mysql_config_apparmor
 
-- meta: flush_handlers
+- name: Restart apparmor
+  service:
+    name: 'apparmor'
+    state: 'restarted'
+  when: mysql_config_apparmor.changed
