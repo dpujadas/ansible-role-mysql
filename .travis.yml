@@ -6,6 +6,8 @@ services:
 
 before_install:
   - sudo apt-get update -qq
+  - sudo service apparmor stop
+  - sudo service apparmor teardown
 
 install:
   - pip install ansible
