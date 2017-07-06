@@ -17,7 +17,6 @@
   apt_repository:
     repo: 'deb http://archive.ubuntu.com/ubuntu trusty universe'
   when:
-    - not mysql_use_percona
     - mysql_version == '5.6'
     - ansible_lsb.codename != 'trusty'
 
