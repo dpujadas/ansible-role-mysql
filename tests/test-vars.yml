@@ -1,0 +1,7 @@
+mysql_datadir: '/srv/mysql'
+mysql_root_password: 'root'
+mysql_databases:
+  - name: testdb
+mysql_users:
+  - name: test
+    password: test
