@@ -1,7 +1,7 @@
 - hosts: travis-trusty
   connection: docker
   remote_user: root
-  pre-tasks:
+  pre_tasks:
     - name: Include test vars
       include_vars: 'test-vars.yml'
   roles:
@@ -12,7 +12,7 @@
 - hosts: travis-xenial
   connection: docker
   remote_user: root
-  pre-tasks:
+  pre_tasks:
     - name: Include test vars
       include_vars: 'test-vars.yml'
   roles:
