@@ -18,3 +18,4 @@
   with_items: '{{ mysql_users }}'
   loop_control:
     loop_var: mysql_user_loop
+  no_log: True
