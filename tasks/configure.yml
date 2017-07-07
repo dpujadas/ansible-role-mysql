@@ -11,23 +11,18 @@
   loop_control:
     loop_var: mysql_config_dir_loop
 
-- name: Configure mysql-server (my.cnf)
+- name: Configure percona-server
   template:
-    src: 'my.cnf.j2'
-    dest: '{{ mysql_config_file }}'
+    src: '{{ mysql_config_file_loop }}.cnf.j2'
+    dest: '{{ mysql_config_include_dir }}/{{ mysql_config_file_loop }}.cnf'
     owner: 'root'
     group: 'root'
     mode: '0644'
-  notify: restart mysql
-
-- name: Copy my.cnf override files
-  template:
-    src: '{{ mysql_config_file_loop }}'
-    dest: '{{ mysql_config_include_dir }}/{{ mysql_config_file_loop | basename }}'
-    owner: 'root'
-    group: 'root'
-    mode: '0644'
-  with_items: '{{ mysql_config_include_files }}'
+  with_items:
+    - client
+    - mysqld
+    - mysqld_safe
+    - mysqldump
   loop_control:
     loop_var: mysql_config_file_loop
   notify: restart mysql

@@ -8,7 +8,6 @@ Role Variables
 
 - `mysql_init_system`: OS init system. (default 'upstart')
 - `mysql_version`: Server version to install (default: '5.7')
-- `mysql_config_include_files`: List of files to override my.cnf (default: [])
 - `mysql_databases`: List of databases (default: [])
 - `mysql_users`: List of users: (default: [])
 - `mysql_root_password`: Password for root user (Ex: 'SuperSecretPass')

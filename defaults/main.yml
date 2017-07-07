@@ -3,7 +3,6 @@
 
 mysql_version: '5.7'
 mysql_init_system: 'upstart'
-mysql_config_include_files: []
 mysql_databases: []
 # Format for mysql_databases:
 #   - name      : DB name
