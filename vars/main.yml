@@ -6,6 +6,7 @@ mysql_group: '{{ mysql_user }}'
 mysql_percona_repository: 'https://repo.percona.com/apt/percona-release_0.1-4.{{ ansible_lsb.codename }}_all.deb'
 mysql_packages:
   - percona-server-server-{{ mysql_version }}
+  - percona-xtrabackup-24
 mysql_config_dir: '/etc/mysql'
 mysql_config_include_dirs:
   v5.6: 'conf.d'
